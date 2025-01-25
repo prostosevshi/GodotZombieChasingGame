@@ -9,6 +9,7 @@ signal player_hit
 
 var SPEED = 3.0
 const JUMP_VELOCITY = 4.5
+const HIT_STAGGER = 8.0
 
 var walking_speed = 3.0
 var running_speed = 5.0
@@ -67,5 +68,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func _hit():
+func _hit(dir):
 	emit_signal("player_hit")
+	velocity += dir * HIT_STAGGER

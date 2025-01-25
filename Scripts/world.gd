@@ -4,7 +4,11 @@ extends Node3D
 @onready var spawns = $map/spawns
 @onready var navigation_region = $map/NavigationRegion3D
 
-var zombie = load("res://Scripts/jen.gd")
+@export var spawn_radius := 10.0
+
+#var jen = load("res://Scripts/jen.gd")
+var jen_scene = load("res://Scenes/jen.tscn") as PackedScene
+var active_spawns = [] 
 var instance
 
 # Called when the node enters the scene tree for the first time.
@@ -14,8 +18,24 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	_check_spawn_proximity()
 
+# Проверяем, близко ли игрок к спавн-точке
+func _check_spawn_proximity():
+	var player_position = get_tree().get_root().get_node("/root/world/map/NavigationRegion3D/Player").global_position
+	
+	for spawn_point in spawns.get_children():
+		if spawn_point in active_spawns:
+			continue
+			
+		if player_position.distance_to(spawn_point.global_position) <= spawn_radius:
+			_spawn_zombie(spawn_point)
+			active_spawns.append(spawn_point)
+			
+func _spawn_zombie(spawn_point):
+	var instance = jen_scene.instantiate()
+	instance.position = spawn_point.global_position
+	navigation_region.add_child(instance)
 
 func _on_player_player_hit() -> void:
 	hit_rect.visible = true
@@ -26,8 +46,8 @@ func _get_random_child(parent_node):
 	var random_id = randi() % parent_node.get_child_count()
 	return parent_node.get_child(random_id)
 
-func _on_zombie_spawn_timer_timeout() -> void:
+#func _on_zombie_spawn_timer_timeout() -> void:
 	var spawn_point = _get_random_child(spawns).global_position
-	instance = zombie.instantiate()
+	instance = jen_scene.instantiate()
 	instance.position = spawn_point
 	navigation_region.add_child(instance)

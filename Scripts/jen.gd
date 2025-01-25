@@ -4,9 +4,9 @@ var player = null
 var state_machine
 
 const SPEED = 4.0
-const ATTACK_RANGE = 2.5
+const ATTACK_RANGE = 1.0
 
-@export var player_path := "Player"
+@export var player_path := "/root/world/map/NavigationRegion3D/Player"
 
 @onready var nav_agent = $NavigationAgent3D
 @onready var anim_tree = $AnimationTree
@@ -41,4 +41,6 @@ func _target_in_range():
 	return global_position.distance_to(player.global_position) < ATTACK_RANGE
 
 func _hit_finished():
-	player._hit()
+	if global_position.distance_to(player.global_position) < ATTACK_RANGE + 1.0:
+		var dir = global_position.direction_to(player.global_position)
+		player._hit(dir)

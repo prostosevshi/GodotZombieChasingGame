@@ -23,7 +23,9 @@ sdfgi_enabled = true
 glow_enabled = true
 fog_enabled = true
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_5peam"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_jo7hw"]
+vertices = PackedVector3Array(-499.5, 1, -3, -6, 1, -3, -5.25, 1, -5, -4.25, 1, -5.5, -4.25, 1, -499.5, -499.5, 1, -499.5, -2.25, 1, -4.75, -2, 1, -3.5, 5, 1, -2.25, 6.25, 1, -2.75, 6.25, 1, -499.5, 7, 1, -2.25, 7.25, 1, -1.25, 499.5, 1, -1.25, 499.5, 1, -499.5, -3.25, 3, -3.25, -3.25, 3, -4, -3.75, 3, -4.25, -4.75, 3, -3.5, -4, 3, -2.75, -4.25, 1, -3.75, -4.25, 1, -3.25, -3.5, 1, -3.5, 3.25, 1, 6, 3.5, 1, 6.5, 5.5, 1, 0, 4.5, 1, -2, 1.5, 1, 5.5, 4.5, 1, -1.25, -3.25, 1, -1.5, 0, 1, 6.25, 0.5, 1, 5.5, 0.25, 1, 7.75, -5.5, 1, -2.25, 2.25, 1, 499.5, 2.25, 1, 8.25, -499.5, 1, 499.5, 6.75, 1, -0.25, 3.25, 1, 8, 499.5, 1, 499.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 4), PackedInt32Array(4, 2, 5), PackedInt32Array(5, 2, 0), PackedInt32Array(8, 7, 6), PackedInt32Array(8, 6, 9), PackedInt32Array(9, 6, 3), PackedInt32Array(9, 3, 4), PackedInt32Array(9, 4, 10), PackedInt32Array(13, 12, 11), PackedInt32Array(11, 9, 13), PackedInt32Array(13, 9, 10), PackedInt32Array(13, 10, 14), PackedInt32Array(16, 15, 17), PackedInt32Array(17, 15, 19), PackedInt32Array(17, 19, 18), PackedInt32Array(22, 21, 20), PackedInt32Array(25, 24, 23), PackedInt32Array(7, 8, 26), PackedInt32Array(25, 23, 27), PackedInt32Array(26, 28, 7), PackedInt32Array(7, 28, 29), PackedInt32Array(29, 28, 31), PackedInt32Array(29, 31, 30), PackedInt32Array(27, 31, 25), PackedInt32Array(25, 31, 28), PackedInt32Array(30, 32, 29), PackedInt32Array(29, 32, 33), PackedInt32Array(34, 32, 35), PackedInt32Array(33, 32, 1), PackedInt32Array(1, 32, 0), PackedInt32Array(0, 32, 34), PackedInt32Array(0, 34, 36), PackedInt32Array(24, 25, 37), PackedInt32Array(24, 37, 12), PackedInt32Array(24, 12, 38), PackedInt32Array(38, 12, 13), PackedInt32Array(38, 13, 34), PackedInt32Array(34, 13, 39), PackedInt32Array(34, 35, 38)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7txi2"]
 albedo_texture = ExtResource("1_jghok")
@@ -53,7 +55,7 @@ environment = SubResource("Environment_8whdm")
 [node name="map" type="Node3D" parent="."]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="map"]
-navigation_mesh = SubResource("NavigationMesh_5peam")
+navigation_mesh = SubResource("NavigationMesh_jo7hw")
 
 [node name="floor" type="CSGBox3D" parent="map/NavigationRegion3D"]
 material_override = SubResource("StandardMaterial3D_7txi2")
@@ -78,21 +80,33 @@ use_collision = true
 size = Vector3(1, 1, 2)
 
 [node name="jen" parent="map/NavigationRegion3D" instance=ExtResource("5_qrouh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.5, -3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0.3, -3.5)
+
+[node name="Player" parent="map/NavigationRegion3D" instance=ExtResource("6_wm7fh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2.1)
+
+[node name="grave1" type="CSGBox3D" parent="map/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4119, 1.0903, 16.0771)
+size = Vector3(1, 1.98059, 1)
+
+[node name="grave2" type="CSGBox3D" parent="map/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.6, 14.6624)
+size = Vector3(1, 1, 1.9248)
+
+[node name="grave3" type="CSGBox3D" parent="map/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.202869, 1.03658, 20.33)
+size = Vector3(0.994263, 1.87317, 2.54004)
 
 [node name="spawns" type="Node3D" parent="map"]
 
 [node name="spawn1" type="Node3D" parent="map/spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.079, 0, 12.8299)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1727, 0, 16.2037)
 
 [node name="spawn2" type="Node3D" parent="map/spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.95183, 0, 5.49851)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.9546, 0, 14.9821)
 
 [node name="spawn3" type="Node3D" parent="map/spawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.7181)
-
-[node name="Player" parent="." instance=ExtResource("6_wm7fh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.2603)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -113,5 +127,5 @@ color = Color(0.945098, 0.113725, 0.0627451, 0.192157)
 wait_time = 5.0
 autostart = true
 
-[connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
+[connection signal="player_hit" from="map/NavigationRegion3D/Player" to="." method="_on_player_player_hit"]
 [connection signal="timeout" from="ZombieSpawnTimer" to="." method="_on_zombie_spawn_timer_timeout"]
