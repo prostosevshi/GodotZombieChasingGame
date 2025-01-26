@@ -4,7 +4,7 @@ extends Node3D
 @onready var spawns = $map/spawns
 @onready var navigation_region = $map/NavigationRegion3D
 
-@export var spawn_radius := 10.0
+@export var spawn_radius := 5.0
 
 #var jen = load("res://Scripts/jen.gd")
 var jen_scene = load("res://Scenes/jen.tscn") as PackedScene
@@ -36,6 +36,13 @@ func _spawn_zombie(spawn_point):
 	var instance = jen_scene.instantiate()
 	instance.position = spawn_point.global_position
 	navigation_region.add_child(instance)
+	
+	var audio_player = AudioStreamPlayer.new()
+	audio_player.stream = preload("res://sounds/sosal.mp3")
+	audio_player.volume_db = 6
+	instance.add_child(audio_player)
+	
+	audio_player.play()
 
 func _on_player_player_hit() -> void:
 	hit_rect.visible = true
